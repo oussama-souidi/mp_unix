@@ -35,4 +35,16 @@ int main() {
     listen(fd, max_connexions);
     int clientsock = accept(fd, (struct sockaddr *)&client, sizeof(client));
 
+     while(1) {
+        len = recv(clientsock, buffer, NMAX, 0);
+        if (len <= 0) {
+            perror("échec de la réception");
+            break;
+        }
+        buffer[len] = '\0';
+        printf("Message reçu: %s\n", buffer);
+
+        // Echo back the received message
+        send(clientsock, buffer, len, 0);
+
 }
