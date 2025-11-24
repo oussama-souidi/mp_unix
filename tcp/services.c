@@ -17,7 +17,7 @@ void send_services_list(int fd)
         "2) Liste fichiers (répertoire courant)\n"
         "3) Envoi contenu d'un fichier (nom demandé après)\n"
         "4) Durée depuis connexion\n"
-        "5) Quitter\nEND\n";
+        "5) Quitter\n";
     write(fd, msg, strlen(msg));
 }
 

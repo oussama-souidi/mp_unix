@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
     write(sock, buffer, strlen(buffer));
     int n = read(sock, buffer, sizeof(buffer) - 1);
     buffer[n] = 0;
-    if (strcmp(buffer, "OK") != 0)
+    if (strncmp(buffer, "OK", 2) != 0)
     {
         printf("Auth échouée: %s\n", buffer);
         return -1;

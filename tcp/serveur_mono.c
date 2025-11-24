@@ -27,7 +27,7 @@ int main()
     struct sockaddr_in addresse, client;
     {
         addresse.sin_family = AF_INET;
-        addresse.sin_addr.s_addr = INADDR_ANY;
+        addresse.sin_addr.s_addr = htonl(INADDR_ANY);
         addresse.sin_port = htons(PORT);
     };
     if (bind(fd, (struct sockaddr *)&addresse, sizeof(addresse)) < 0)
@@ -35,11 +35,20 @@ int main()
         perror("échec du bind");
         exit(0);
     }
+
     listen(fd, max_connexions);
-    int client_sock = accept(fd, (struct sockaddr *)&client, (int *)sizeof(client));
+    socklen_t client_len = sizeof(client);
+    int client_sock = accept(fd, (struct sockaddr *)&client, &client_len);
+    if (client_sock < 0)
+    {
+        perror("échec de création de socket");
+        return -1;
+    }
     printf("Client connecté\n");
+    
     int n = read(client_sock, buffer, sizeof(buffer) - 1);
     buffer[n] = 0;
+    
     char user[50], password[50];
     sscanf(buffer, "LOGIN %49s %49s", user, password);
     
@@ -64,14 +73,15 @@ int main()
         }
         buffer[n] = '\0';
         printf("Message reçu: %s\n", buffer);
-        if (strcmp(buffer, "LIST")==0) {
+        if (strncmp(buffer, "LIST", 4)==0) {
             send_services_list(client_sock);
-        } else if (strcmp(buffer, "SERVICE")==0) {
+        } else if (strncmp(buffer, "SERVICE", 7)==0) {
             int code; sscanf(buffer, "SERVICE %d", &code);
             execute_service(client_sock, code, start);
             if (code==5) break;
         } else {
             write(client_sock, "Commande inconnue\n", 18);
+            printf("Commande inconnue: %s\n", buffer);
         }
     }
 
