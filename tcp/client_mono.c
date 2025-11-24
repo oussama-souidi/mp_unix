@@ -7,8 +7,12 @@
 #include <netinet/in.h>
 #include <stdlib.h>
 
+#define BUFFER_SIZE 4096
+
 int main(int argc, char *argv[])
 {
+    char buffer[BUFFER_SIZE];
+
     if (argc != 3)
     {
         printf("Usage: %s <hostname> <port>\n", argv[0]);
@@ -34,7 +38,6 @@ int main(int argc, char *argv[])
     scanf("%49s", user);
     printf("Mot de passe: ");
     scanf("%49s", pass);
-    char buffer[4096];
     snprintf(buffer, sizeof(buffer), "LOGIN %s %s", user, pass);
     write(sock, buffer, strlen(buffer));
     int n = read(sock, buffer, sizeof(buffer) - 1);

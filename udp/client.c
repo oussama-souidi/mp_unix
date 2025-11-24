@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
     char *hostname = argv[1];
     int port = atoi(argv[2]);
 
-    char buffer[NMAX];
+    char buffer[BUFFER_SIZE];
     struct sockaddr_in addresse;
     {
         addresse.sin_family = AF_INET;
@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
 
     int n;
     int res = scanf("%d", &n);
-    bool valid = n >= 1 && n <= NMAX;
+    bool valid = n >= 1 && n <= BUFFER_SIZE;
 
     while (!valid)
     {
@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
         while (getchar() != '\n')
             ;
         int res = scanf("%d", &n);
-        valid = n >= 1 && n <= NMAX;
+        valid = n >= 1 && n <= BUFFER_SIZE;
     }
 
     send(fd, &n, sizeof(n), 0);

@@ -58,7 +58,7 @@ int main(int argc, char *argv[])
         int x = *(int *)buffer;
         srand(time(NULL));
 
-        int list[NMAX];
+        int list[BUFFER_SIZE];
         for (int i = 0; i < x; i++)
         {
             int randomNumber = rand() % 1000 + 1;

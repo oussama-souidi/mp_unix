@@ -10,11 +10,11 @@
 #include <unistd.h>
 
 #define PORT 5000
-#define NMAX 100
-#define MAXLINE 1000
+#define BUFFER_SIZE 1000
+
 int main()
 {
-    char buffer[NMAX];
+    char buffer[BUFFER_SIZE];
     int max_connexions = 1;
 
     int fd = socket(AF_INET, SOCK_STREAM, 0);
