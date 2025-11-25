@@ -8,7 +8,6 @@
 #include <time.h>
 #include "services.h"
 
-#define PORT 5001
 #define MAX_CLIENTS 10
 #define BUFFER_SIZE 1000
 
@@ -55,8 +54,16 @@ void handle_client(int client)
     exit(0);
 }
 
-int main()
+int main(int argc, char *argv[])
 {
+    char buffer[BUFFER_SIZE];
+
+    if (argc != 2)
+    {
+        printf("Usage: %s <port>\n", argv[0]);
+        return 1;
+    }
+    int PORT = atoi(argv[1]);
     signal(SIGCHLD, SIG_IGN); // éviter zombies
     int fd = socket(AF_INET, SOCK_STREAM, 0);
     struct sockaddr_in addresse;
