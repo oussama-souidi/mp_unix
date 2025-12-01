@@ -6,17 +6,17 @@ CFLAGS = -Wall
 all: serveur_mono serveur_multi client_mono client_multi
 
 serveur_mono: serveur_mono.c services.c
-	$(CC) $(CFLAGS) serveur_mono.c services.c -o serveur_mono
+	$(CC) $(CFLAGS) serveur_mono.c services.c -o serveur
 
 serveur_multi: serveur_multi.c services.c
-	$(CC) $(CFLAGS) serveur_multi.c services.c -o serveur_multi
+	$(CC) $(CFLAGS) serveur_multi.c services.c -o serveur
 
 
 client_mono: client_mono.c
-	$(CC) $(CFLAGS) client_mono.c -o client_mono
+	$(CC) $(CFLAGS) client_mono.c -o client
 
-client_multi: client_mono.c
-	$(CC) $(CFLAGS) client_multi.c -o client_multi
+client_multi: client_multi.c
+	$(CC) $(CFLAGS) client_multi.c -o client
 
 
 clean:
