@@ -12,12 +12,11 @@ serveur_multi: serveur_multi.c services.c
 	$(CC) $(CFLAGS) serveur_multi.c services.c -o serveur
 
 
-client_mono: client_mono.c
-	$(CC) $(CFLAGS) client_mono.c -o client
-
-client_multi: client_multi.c
-	$(CC) $(CFLAGS) client_multi.c -o client
+client_mono: client.c
+	$(CC) $(CFLAGS) client.c -o client
 
 
 clean:
-	rm -f serveur_mono serveur_multi client_mono client_multi
+	rm -f serveur_mono serveur_multi client
+
+	
