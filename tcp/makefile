@@ -18,5 +18,3 @@ client_mono: client.c
 
 clean:
 	rm -f serveur_mono serveur_multi client
-
-	
